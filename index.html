@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Sayang</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
+        height: 100vh;
+        background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      }
+
+      .container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        perspective: 1000px;
+      }
+
+      .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transform: translateX(100%) rotateY(20deg);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        z-index: 1;
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+        z-index: 5;
+      }
+
+      .slide.previous {
+        transform: translateX(-100%) rotateY(-20deg);
+        opacity: 0;
+      }
+
+      .slide1 {
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      }
+
+      .slide2 {
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      }
+
+      .slide3 {
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      }
+
+      .slide4 {
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      }
+
+      .slide5 {
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      }
+
+      .slide6 {
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      }
+
+      .slide7 {
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+        overflow-y: auto;
+      }
+
+      .content {
+        width: 80%;
+        max-width: 700px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        transition: all 0.5s ease;
+      }
+
+      .content:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .content::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: linear-gradient(
+          45deg,
+          #ff5e7850,
+          #ff9a9e50,
+          #fad0c450,
+          #a18cd150
+        );
+        z-index: -1;
+        filter: blur(20px);
+        animation: gradientBg 10s ease infinite;
+        background-size: 400% 400%;
+      }
+
+      @keyframes gradientBg {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: 4rem;
+        margin-bottom: 30px;
+        color: #ff5e78;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative;
+        display: inline-block;
+      }
+
+      h1::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        bottom: -10px;
+        left: 0;
+        background: linear-gradient(90deg, transparent, #ff5e78, transparent);
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 20px;
+        line-height: 1.8;
+        position: relative;
+        padding-left: 15px;
+      }
+
+      p::before {
+        content: "❤";
+        position: absolute;
+        left: 0;
+        color: #ff5e78;
+      }
+
+      .signature {
+        font-family: "Dancing Script", cursive;
+        font-weight: bold;
+        font-size: 1.6rem;
+        color: #ff5e78;
+        margin-top: 30px;
+        text-align: right;
+        position: relative;
+      }
+
+      .nav-buttons {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 30px;
+        z-index: 100;
+      }
+
+      .nav-btn {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .nav-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ff5e78, #ff9a9e);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .nav-btn::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        border-top: 4px solid #ff5e78;
+        border-right: 4px solid #ff5e78;
+        transform: translate(-50%, -50%) rotate(45deg);
+        transition: all 0.3s ease;
+      }
+
+      .prev::after {
+        transform: translate(-40%, -50%) rotate(-135deg);
+      }
+
+      .nav-btn:hover {
+        transform: scale(1.15);
+      }
+
+      .nav-btn:hover::before {
+        opacity: 1;
+      }
+
+      .nav-btn:hover::after {
+        border-color: white;
+      }
+
+      .nav-btn:active {
+        transform: scale(0.95);
+      }
+
+      .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #ff5e78;
+        transform: rotate(45deg);
+        opacity: 0;
+        z-index: -1;
+        filter: drop-shadow(0 0 5px rgba(255, 94, 120, 0.5));
+      }
+
+      .heart:before,
+      .heart:after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background-color: #ff5e78;
+        border-radius: 50%;
+        position: absolute;
+      }
+
+      .heart:before {
+        top: -10px;
+        left: 0;
+      }
+
+      .heart:after {
+        top: 0;
+        left: -10px;
+      }
+
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .emoji {
+        position: absolute;
+        font-size: 30px;
+        opacity: 0;
+        animation: floatUp 6s linear forwards;
+        z-index: 10;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(0deg) scale(1);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-1000px) rotate(720deg) scale(0);
+          opacity: 0;
+        }
+      }
+
+      /* Click to reveal styles */
+      .hidden-content {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.5s ease;
+      }
+
+      .reveal-btn {
+        background: linear-gradient(135deg, #ff5e78, #ff9a9e);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border-radius: 30px;
+        cursor: pointer;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .reveal-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .reveal-btn:active {
+        transform: translateY(0);
+      }
+
+      .revealed {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Last slide image styles */
+      .image-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .image-box {
+        width: 48%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .image-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .image-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      .image-box:hover img {
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          width: 90%;
+          padding: 30px;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        p {
+          font-size: 1rem;
+          padding-left: 10px;
+        }
+
+        .nav-btn {
+          width: 50px;
+          height: 50px;
+        }
+
+        .image-box {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .content {
+          width: 95%;
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
+
+        .signature {
+          font-size: 1.3rem;
+        }
+
+        .nav-btn {
+          width: 45px;
+          height: 45px;
+        }
+
+        .reveal-btn {
+          padding: 12px 24px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="particles"></div>
+
+      <!-- Slide 1 -->
+      <div class="slide slide1 active">
+        <div class="content">
+          <h1 style="text-align: center">Happy Birthday Sayanggg</h1>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide slide2">
+        <div class="content">
+          <h1>For my favOoo..</h1>
+          <p>
+            Okeeyy first I want to say, thank you for joining to be a part of my
+            life story. You don't get into the good part anyway there is evil
+            too aowkowk.
+          </p>
+          <p>
+            Although you could say we have no memories other than communication
+            and interaction through virtual only but it's okay I'm still
+            grateful because you are present in my life.
+          </p>
+          <p>
+            So happy birthday sayangg, hopefully in between your busy schedule
+            you still remember me who is always waiting for notifications from
+            you hehe. Hopefully you can turn into a better person again.
+          </p>
+          <p class="signature">Lovee, r💗</p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide slide3">
+        <div class="content">
+          <p>
+            I think the first time we knew was from mobile legends huh?
+            Honestly, I didn't know who you were until I met M when I was in
+            high school and she started telling me this story about you (I
+            wasn't interested at that time) so you could say that we were
+            brought together by M through mobile legend wkwk.
+          </p>
+          <p>
+            At first, I thought that this guy was a red flag 🚩🚩, how could he
+            really hurt my friend?!! (and I now feel it) because at first I got
+            the story from my friend's point of view so I thought this.
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 4 - Click to reveal -->
+      <div class="slide slide4">
+        <div class="content">
+          <button class="reveal-btn">Click to Reveal a Secret!</button>
+          <div class="hidden-content">
+            <p>
+              You used to be very innocent huh?? Not innocent but more
+              introverted. Even though we used to go to the same school in
+              junior high school and I never met you at all even though our
+              classes were next to each other?!!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="slide slide5">
+        <div class="content">
+          <p>
+            Okay continue, well I didn't expect us to be close like this because
+            the interaction was only from online games, until when you asked for
+            my whatsapp number, continued to ig, continued to tiktok and
+            others!!!
+          </p>
+          <p>
+            (Ppsstt this is actually a secret but sometimes I often seek
+            attention through whatsapp statuses specifically to you) dumb as fck
+            emg.
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="slide slide6">
+        <div class="content">
+          <p>
+            I know that you're bored and blah blah blah, but I keep quiet so
+            that you don't get more bored hehe. Indeed, when I fall in love, I
+            become this STUPID bjirr.
+          </p>
+          <p>
+            I often think, if you're not with me anymore, hopefully you can
+            treat other women as you should (don't be a jerk again bro).
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 7 - With images -->
+      <div class="slide slide7">
+        <div class="content">
+          <p>
+            Even though our story is this short but I'm very grateful to meet
+            you, don't get tired of all my drama please. I just want to be cared
+            for, if you don't it's okay because I'm a surrendered person.
+          </p>
+
+          <p>Okee this is all, love youuuu!!!</p>
+
+          <div class="image-container">
+            <div class="image-box">
+              <img src="/assets/1.jpeg" alt="Us together" />
+            </div>
+            <div class="image-box">
+              <img src="/assets/2.jpeg" alt="Happy moments" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="nav-btn prev"></button>
+        <button class="nav-btn next"></button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
